@@ -1,16 +1,15 @@
 'use client';
 
 import { Button } from '*/components/ui/button';
+import getImageUrl from 'utils/supabase/storage';
 
-export default function DropboxImage() {
+export default function DropboxImage({ image }) {
   return (
     <div className="relative w-full flex flex-col gap-2 p-4 border border-gray-100 rounded-2xl shadow-md">
-      {/* Image */}
       <div>
-        <img src="/images/dropbox_icon.png" className="w-full aspect-square rounded-2xl" />
+        <img src={getImageUrl(image.name)} className="w-full aspect-square rounded-2xl" />
       </div>
-      {/* FileName */}
-      <div>Dropbox</div>
+      <div>{image.name}</div>
 
       <div>
         <Button onClick={() => {}} variant="destructive" className="absolute top-4 right-4">

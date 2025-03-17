@@ -14,7 +14,7 @@ export default function UI() {
       <Logo />
       <SearchInput searchInput={searchInput} setSearchInput={setSearchInput} />
       <FileDragDropZone />
-      <DropboxImageList />
+      <DropboxImageList searchInput={searchInput} />
     </main>
   );
 }
