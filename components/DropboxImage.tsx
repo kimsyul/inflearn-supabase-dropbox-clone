@@ -1,9 +1,22 @@
 'use client';
 
 import { Button } from '*/components/ui/button';
-import getImageUrl from 'utils/supabase/storage';
+import { useMutation } from '@tanstack/react-query';
+import { deleteFile } from 'actions/storageActions';
+import { queryClient } from 'config/ReactQueryProvider';
+import { Loader2 } from 'lucide-react';
+import { getImageUrl } from 'utils/supabase/storage';
 
 export default function DropboxImage({ image }) {
+  const deleteFileMutation = useMutation({
+    mutationFn: deleteFile,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['images'],
+      });
+    },
+  });
+
   return (
     <div className="relative w-full flex flex-col gap-2 p-4 border border-gray-100 rounded-2xl shadow-md">
       <div>
@@ -12,8 +25,13 @@ export default function DropboxImage({ image }) {
       <div>{image.name}</div>
 
       <div>
-        <Button onClick={() => {}} variant="destructive" className="absolute top-4 right-4">
-          <i className="fas fa-trash" />
+        <Button
+          onClick={() => {
+            deleteFileMutation.mutate(image.name);
+          }}
+          variant="destructive"
+          className="absolute top-4 right-4">
+          {deleteFileMutation.isPending ? <Loader2 /> : <i className="fas fa-trash" />}
         </Button>
       </div>
     </div>

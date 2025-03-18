@@ -11,6 +11,8 @@ export default function DropboxImageList({ searchInput }) {
     queryFn: () => searchFiles(searchInput),
   });
 
+  console.log(searchImagesQuery.data);
+
   return (
     <section className="grid md:grid-cols-3 lg:grid-cols-4 grid-cols-2 gap-2">
       {searchImagesQuery.isLoading && <Loader />}
