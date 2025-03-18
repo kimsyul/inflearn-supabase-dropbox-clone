@@ -23,7 +23,7 @@ export default function DropboxImage({ image }) {
         <img src={getImageUrl(image.name)} className="w-full aspect-square rounded-2xl" />
       </div>
       <div>{image.name}</div>
-
+      <div>{new Date(image.updated_at).toLocaleTimeString()}</div>
       <div>
         <Button
           onClick={() => {
